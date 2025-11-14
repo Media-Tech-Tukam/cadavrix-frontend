@@ -1,7 +1,7 @@
 // Sistema de Upload de Obras para Cadavrix
 class SubirObraManager {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = window.CadavrixConfig.API_BASE_URL;
         this.currentUser = null;
         this.selectedFile = null;
         this.assignedCell = null;

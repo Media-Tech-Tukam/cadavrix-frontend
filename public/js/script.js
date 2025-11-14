@@ -8,7 +8,7 @@ class CadavrixGrid {
         this.gridSize = { width: 10, height: 10 };
         
         // Configuración de la API
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = window.CadavrixConfig.API_BASE_URL;
         
         // Inicializar sistema de drag scroll
         this.dragScrollManager = new DragScrollManager();

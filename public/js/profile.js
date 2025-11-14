@@ -8,7 +8,7 @@ class ArtistProfile {
         this.currentTab = 'gallery';
         
         // Configuración de la API
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = window.CadavrixConfig.API_BASE_URL;
     }
 
     async init() {

@@ -1,7 +1,7 @@
 // Sistema de Autenticación para Cadavrix
 class AuthManager {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = window.CadavrixConfig.API_BASE_URL;
         this.currentTab = 'login';
         
         // Referencias DOM

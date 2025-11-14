@@ -1,7 +1,7 @@
 // Sistema de Participación para Cadavrix
 class ParticipacionManager {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.apiBaseUrl = window.CadavrixConfig.API_BASE_URL;
         this.currentUser = null;
         this.gridData = null;
         this.cellAssignment = null;
