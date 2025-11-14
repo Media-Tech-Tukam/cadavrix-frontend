@@ -172,7 +172,8 @@ class CadavrixGrid {
             
             // Crear imagen - RUTA PARA BACKEND
             const img = document.createElement('img');
-            img.src = `http://localhost:5000/${artwork.image}`;
+            const baseUrl = window.CadavrixConfig.API_BASE_URL.replace('/api', '');
+            img.src = `${baseUrl}/${artwork.image}`;
             img.alt = `Obra: ${artwork.title} por ${artwork.artist.name}`;
             img.loading = 'lazy'; // Lazy loading para performance
             

@@ -227,7 +227,8 @@ class ArtistProfile {
             `${artwork.gridPosition.x}, ${artwork.gridPosition.y}` : 'No asignada';
 
         // RUTA PARA BACKEND API
-        const imgSrc = `http://localhost:5000/${artwork.image}`;
+        const baseUrl = window.CadavrixConfig.API_BASE_URL.replace('/api', '');
+        const imgSrc = `${baseUrl}/${artwork.image}`;
 
         card.innerHTML = `
             <img class="artwork-image" src="${imgSrc}" alt="${artwork.title}" loading="lazy">
