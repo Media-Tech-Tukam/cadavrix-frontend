@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/*esto es solo del grid*/
+main {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    overflow: auto;
+    cursor: grab;
+}
+
+main.dragging {
+    cursor: grabbing;
+}
+
+main.dragging .lleno {
+    pointer-events: none;
+}
+
+section {
+    height: 4000px;
+    width: 4000px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 400px);
+    gap: 0;
+}
+
+article {
+    border-bottom: 1px dashed #111;
+    border-right: 1px dashed #111;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.lleno {
+    background-color: #111;
+    border: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.lleno:hover {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.lleno a {
+    position: absolute;
+}
+
+.lleno img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    user-select: none;
+}
+
+.lleno:hover img {
+    transform: scale(1.1);
+}
+

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadavrix - Arte Colaborativo</title>
+    <!-- RUTAS CORREGIDAS -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/grid.css">
+</head>
+<body>
+    <header>
+        <h1>Cadavrix</h1>
+        <a href="../views/participar.html" class="btnParticipar">Participar</a>
+        <nav>
+            <ul>
+                <li><a href="../views/index.html">Inicio</a></li>
+                <li><a href="auth.html">Iniciar Sesión</a></li>
+                <li><a href="auth.html?mode=register">Registrarse</a></li>
+                <li><a href="../views/profile.html">Perfil</a></li>
+                <li><a href="#">¿Qué es Cadavrix?</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <!-- El grid se generará dinámicamente aquí -->
+        <section id="cadavrix-grid">
+            <!-- Loading indicator -->
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Cargando obras de arte...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para mostrar artwork -->
+    <div id="artworkModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="artwork-container">
+                    <img id="modalArtworkImg" src="" alt="Artwork">
+                </div>
+                <div class="artwork-info">
+                    <h2 id="modalArtworkTitle">Título de la Obra</h2>
+                    <h3 id="modalArtistName">Nombre del Artista</h3>
+                    <p class="creation-date" id="modalCreationDate">Fecha de creación</p>
+                    <p class="artist-bio" id="modalArtistBio">Biografía del artista...</p>
+                    <div class="modal-actions">
+                        <button class="btn-like">Me gusta</button>
+                        <button class="btn-share">Compartir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Panel (opcional, para desarrollo) -->
+    <div id="stats-panel" class="stats-panel hidden">
+        <h3>Estadísticas del Grid</h3>
+        <div id="stats-content"></div>
+        <button id="toggle-stats" onclick="toggleStats()">Mostrar/Ocultar Stats</button>
+    </div>
+
+    <!-- Scripts - RUTAS CORREGIDAS -->
+    <script src="../public/js/script.js"></script>
+    
+    <script>
+        // Función para mostrar/ocultar panel de estadísticas (útil para desarrollo)
+        function toggleStats() {
+            const panel = document.getElementById('stats-panel');
+            const content = document.getElementById('stats-content');
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                
+                // Actualizar estadísticas
+                if (window.cadavrixGrid) {
+                    const stats = window.cadavrixGrid.getStatistics();
+                    content.innerHTML = `
+                        <p><strong>Celdas totales:</strong> ${stats.totalCells}</p>
+                        <p><strong>Celdas ocupadas:</strong> ${stats.occupiedCells}</p>
+                        <p><strong>Celdas vacías:</strong> ${stats.emptyCells}</p>
+                        <p><strong>Progreso:</strong> ${stats.completionPercentage}%</p>
+                        <p><strong>Artistas:</strong> ${stats.totalArtists}</p>
+                        <p><strong>Obras:</strong> ${stats.totalArtworks}</p>
+                    `;
+                }
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+        
+        // Auto-ocultar loading cuando grid esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simular delay para mostrar loading
+            setTimeout(() => {
+                const loadingContainer = document.querySelector('.loading-container');
+                if (loadingContainer) {
+                    loadingContainer.style.display = 'none';
+                }
+            }, 1000);
+              // LOGOUT SIMPLE - Solo mostrar si está logueado
+            if (localStorage.getItem('cadavrix_token')) {
+                const userData = JSON.parse(localStorage.getItem('cadavrix_user'));
+                const artistId = userData?.artistId || userData?.id;
+                
+                const nav = document.querySelector('header nav ul');
+                if (nav) {
+                    nav.innerHTML += `
+                        <li>
+                            <a href="profile.html?artist=${artistId}" 
+                               style="color: #4f46e5; font-weight: 600; text-decoration: none; margin-right: 1rem;">
+                                👤 Mi Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <button onclick="logout()" 
+                                    style="background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: background 0.2s ease;"
+                                    onmouseover="this.style.background='#b91c1c'"
+                                    onmouseout="this.style.background='#dc2626'">
+                                Cerrar Sesión
+                            </button>
+                        </li>
+                    `;
+                }
+                
+                console.log('👤 Usuario logueado:', userData?.artistName || userData?.name);
+                console.log('🆔 Artist ID:', artistId);
+            }
+        });
+        function logout() {
+            if (confirm('¿Estás seguro que quieres cerrar sesión?')) {
+                localStorage.removeItem('cadavrix_token');
+                localStorage.removeItem('cadavrix_user');
+                console.log('👋 Sesión cerrada');
+                window.location.reload();
+            }
+        }
+    </script>
+</body>
+</html>

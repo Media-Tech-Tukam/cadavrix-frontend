@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del Artista - Cadavrix</title>
+    <!-- RUTAS CORREGIDAS -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/profile.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Cadavrix</a></h1>
+        <a href="#" class="btnParticipar">Participar</a>
+        <nav>
+            <ul>
+                <li><a href="../views/index.html">Grid</a></li>
+                    <li><a href="../views/participar.html">Participar</a></li>
+                    <li><a href="#" class="active">Subir Obra</a></li>
+                    <li><a href="#" id="userMenuToggle">Mi Cuenta</a></li>
+                <li><a href="#">¿Qué es Cadavrix?</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="profile-main">
+        <!-- Loading indicator -->
+        <div class="loading-container" id="profileLoading">
+            <div class="loading-spinner"></div>
+            <p>Cargando perfil del artista...</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="error-container hidden" id="errorContainer">
+            <div class="error-content">
+                <h2>🎨 Artista no encontrado</h2>
+                <p>El artista que buscas no existe o ha sido eliminado.</p>
+                <a href="index.html" class="btn-back">← Volver al grid principal</a>
+            </div>
+        </div>
+
+        <!-- Profile content -->
+        <div class="profile-container hidden" id="profileContainer">
+            <!-- Artist Header -->
+            <section class="artist-header">
+                <div class="artist-avatar">
+                    <div class="avatar-placeholder" id="artistAvatar">
+                        <!-- Avatar generado con iniciales -->
+                    </div>
+                </div>
+                
+                <div class="artist-info">
+                    <h1 class="artist-name" id="artistName">Nombre del Artista</h1>
+                    <p class="artist-bio" id="artistBio">Biografía del artista...</p>
+                    
+                    <div class="artist-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="artworkCount">0</span>
+                            <span class="stat-label">Obras</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="joinDate">2024</span>
+                            <span class="stat-label">Miembro desde</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links" id="socialLinks">
+                        <!-- Social media links se generan dinámicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation tabs -->
+            <nav class="profile-tabs">
+                <button class="tab-btn active" data-tab="gallery">
+                    Galería
+                </button>
+                <button class="tab-btn" data-tab="info">
+                    Información
+                </button>
+            </nav>
+
+            <!-- Gallery Section -->
+            <section class="tab-content active" id="gallery">
+                <div class="gallery-header">
+                    <h2>Obras de <span id="galleryArtistName">Artista</span></h2>
+                    <div class="gallery-stats">
+                        <span id="galleryCount">0 obras</span>
+                    </div>
+                </div>
+                
+                <div class="artworks-grid" id="artworksGrid">
+                    <!-- Las obras se cargan dinámicamente aquí -->
+                </div>
+                
+                <div class="no-artworks hidden" id="noArtworks">
+                    <div class="no-content">
+                        <span class="icon">🎭</span>
+                        <h3>Sin obras aún</h3>
+                        <p>Este artista aún no ha subido ninguna obra al grid colectivo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="tab-content" id="info">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <h3>📅 Información de Registro</h3>
+                        <div class="info-item">
+                            <label>Fecha de registro:</label>
+                            <span id="fullJoinDate">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>ID de artista:</label>
+                            <span id="artistId">-</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🔗 Enlaces</h3>
+                        <div class="social-links-detailed" id="socialLinksDetailed">
+                            <!-- Enlaces detallados se generan aquí -->
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>📊 Estadísticas</h3>
+                        <div class="info-item">
+                            <label>Total de obras:</label>
+                            <span id="totalArtworks">0</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Primera obra:</label>
+                            <span id="firstArtwork">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Última obra:</label>
+                            <span id="lastArtwork">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para ver obra en detalle (reutilizada) -->
+    <div id="artworkModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="artwork-container">
+                    <img id="modalArtworkImg" src="" alt="Artwork">
+                </div>
+                <div class="artwork-info">
+                    <h2 id="modalArtworkTitle">Título de la Obra</h2>
+                    <h3 id="modalArtistName">Nombre del Artista</h3>
+                    <p class="creation-date" id="modalCreationDate">Fecha de creación</p>
+                    <p class="artwork-description" id="modalArtworkDescription">Descripción de la obra...</p>
+                    <div class="modal-actions">
+                        <button class="btn-like">Me gusta</button>
+                        <button class="btn-share">Compartir</button>
+                        <a href="#" class="btn-back-grid" id="backToGrid">Ver en grid</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RUTAS CORREGIDAS -->
+    <script src="../public/js/profile.js"></script>
+</body>
+</html>

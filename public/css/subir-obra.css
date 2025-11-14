@@ -1,0 +1,735 @@
+/* ===========================================
+   ESTILOS PARA PÁGINA SUBIR OBRA
+   =========================================== */
+
+/* Contenedor principal */
+.upload-main {
+   margin-top: 100px;
+    padding: 2rem 1rem;
+   
+}
+
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Contenedores de pasos */
+.step-container {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    box-shadow: 0 25px 50px rgba(79, 70, 229, 0.15);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.step-container.hidden {
+    display: none;
+}
+
+/* Iconos grandes */
+.icon-large {
+    font-size: 4.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: center;
+}
+
+/* Títulos */
+.step-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.step-container h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 1.5rem 0 1rem 0;
+}
+
+/* Recordatorio de celda */
+.cell-reminder {
+    background: black;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+/* Secciones del formulario */
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.form-section h3 {
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+/* Área de upload */
+.upload-area {
+    border: 3px dashed #a7a7a7;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: #e2e2e2;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area:hover {
+    border-color: #000;
+    background: #fff;
+    transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+    border-color: #000;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+    border-style: solid;
+}
+
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    color: #64748b;
+}
+
+.upload-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.upload-specs {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.upload-area input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Preview de imagen */
+.image-preview {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.image-preview.hidden {
+    display: none;
+}
+
+.image-preview img {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 0 auto 1rem;
+    display: block;
+    border: 2px solid #e5e7eb;
+}
+
+.image-info {
+    text-align: center;
+}
+
+.image-info p {
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: #4f46e5;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.btn-link:hover {
+    color: #3730a3;
+}
+
+/* Mensajes de validación */
+.validation-messages {
+    margin-top: 1rem;
+}
+
+.validation-message {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    font-size: 0.875rem;
+}
+
+.validation-message.error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.validation-message.success {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #059669;
+}
+
+.validation-message.warning {
+    background: #fffbeb;
+    border: 1px solid #fed7aa;
+    color: #d97706;
+}
+
+/* Campos del formulario */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+    line-height: 1.5;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: right;
+}
+
+/* Checkbox personalizado */
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.checkbox-container:hover {
+    background-color: #f8fafc;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #d1d5db;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    margin-top: 2px;
+    background: white;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+    background-color: #000;
+    border-color: #000;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.checkbox-container:hover .checkmark {
+    border-color: #4f46e5;
+}
+
+/* Checklist especial */
+.checklist {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.checklist .checkbox-container {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.checklist .checkbox-container:hover {
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de ayuda */
+.help-text {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+}
+
+/* Obra actual (reemplazar) */
+.current-artwork {
+    margin: 2rem 0;
+}
+
+.artwork-preview {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 1.5rem;
+    background: #e9e9e9;
+    border: 2px solid #979797;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.artwork-preview img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #c4c4c4;
+}
+
+.artwork-details h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.artwork-details p {
+    margin: 0.5rem 0;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+.replace-option {
+    background: #e7e7e7;
+    border: 2px solid #666;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.replace-option h3 {
+    margin-top: 0;
+}
+
+.replace-option p {
+    margin-bottom: 1.5rem;
+}
+
+/* Botones */
+.btn-primary,
+.btn-secondary {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin: 0.5rem;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #000;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:disabled {
+    background: #aaaaaa;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.btn-secondary {
+    background: white;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+}
+
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.125rem;
+}
+
+/* Acciones del formulario */
+.form-actions {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f1f5f9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+/* Estado de upload */
+.upload-progress {
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4f46e5 0%, #7c3aed 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* Pasos de procesamiento */
+.processing-steps {
+    margin: 2rem 0;
+}
+
+.step {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.step.active {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    opacity: 1;
+    color: #1d4ed8;
+}
+
+.step.completed {
+    background: #f0fdf4;
+    border-color: #10b981;
+    opacity: 1;
+    color: #047857;
+}
+
+/* Success final */
+.success-artwork {
+    margin: 2rem 0;
+}
+
+.artwork-final-preview {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    background: #000;
+    /*border: 2px solid #10b981;*/
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.artwork-final-preview img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.artwork-final-details h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.artwork-final-details p {
+    margin: 0.75rem 0;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.next-steps-success {
+    background: #d8d8d8;
+    border: 2px solid #7a7a7a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.next-steps-success h3 {
+    margin-top: 0;
+}
+
+.next-steps-success ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.next-steps-success li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+/* Mensajes de estado */
+.message {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.message.error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.message.success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #059669;
+}
+
+.message.hidden {
+    display: none;
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    padding: 3rem;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #4f46e5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .upload-container {
+        margin: 0 1rem;
+    }
+    
+    .step-container {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .step-container h2 {
+        font-size: 1.5rem;
+    }
+    
+    .upload-area {
+        padding: 2rem 1rem;
+    }
+    
+    .artwork-preview,
+    .artwork-final-preview {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .artwork-preview img,
+    .artwork-final-preview img {
+        justify-self: center;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .form-section h3 {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .upload-main {
+        padding: 1rem 0.5rem;
+    }
+    
+    .step-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .icon-large {
+        font-size: 3.5rem;
+    }
+    
+    .upload-area {
+        padding: 1.5rem 1rem;
+    }
+    
+    .upload-text {
+        font-size: 1rem;
+    }
+    
+    .checkbox-container {
+        font-size: 0.875rem;
+    }
+    
+    .form-section {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Animaciones de entrada */
+.step-container.active {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estados del formulario */
+.form-group.error input,
+.form-group.error textarea {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.form-group.success input,
+.form-group.success textarea {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+/* Efectos hover mejorados */
+.form-section:hover {
+    background: rgba(248, 250, 252, 0.5);
+    border-radius: 12px;
+    transition: background 0.3s ease;
+}
+
+.checkbox-container input[type="checkbox"]:checked + .checkmark {
+    animation: checkmarkPop 0.3s ease-out;
+}
+
+@keyframes checkmarkPop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}

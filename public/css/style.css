@@ -1,0 +1,555 @@
+@import url('https://fonts.googleapis.com/css2?family=Festive&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+body {
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    background-color: #000;
+}
+
+header {
+    height: 100px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 30px;
+    border-bottom: 1px solid #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    z-index: 100;
+}
+
+header h1 {
+    font-family: "Festive", cursive;
+    font-size: 60px;
+    font-weight: 500;
+}
+
+.btnParticipar {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btnParticipar:hover {
+    background-color: #ff5252;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+}
+
+nav ul li {
+    padding-left: 10px;
+    font-size: 0.8em;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Estilos de la Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    margin: 2% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #666;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    color: #ff6b6b;
+    background-color: white;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    display: flex;
+    height: 100%;
+}
+
+.artwork-container {
+    flex: 2;
+    background-color: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modalArtworkImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.artwork-info {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+#modalArtworkTitle {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#modalArtistName {
+    font-size: 1.8em;
+    font-weight: 400;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+/* Artist Link in Modal */
+.artist-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.artist-link:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.creation-date {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    opacity: 0.8;
+    font-style: italic;
+}
+
+.artist-bio {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.artwork-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    font-style: italic;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 15px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.modal-actions button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.btn-like {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-like:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-share {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-share:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        height: 95vh;
+        margin: 2.5% auto;
+    }
+    
+    .modal-body {
+        flex-direction: column;
+    }
+    
+    .artwork-container {
+        flex: 1;
+        padding: 20px;
+    }
+    
+    .artwork-info {
+        flex: 1;
+        padding: 20px;
+    }
+    
+    #modalArtworkTitle {
+        font-size: 1.8em;
+    }
+    
+    #modalArtistName {
+        font-size: 1.3em;
+    }
+    
+    .artist-bio {
+        font-size: 1em;
+    }
+    
+    header h1 {
+        font-size: 40px;
+    }
+    
+    .btnParticipar {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0 15px;
+        flex-direction: column;
+        height: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    nav ul {
+        margin-top: 10px;
+    }
+    
+    main {
+        top: 120px;
+    }
+    
+    section {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(20, 200px);
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/* No Artworks State */
+.no-artworks {
+    text-align: center;
+    padding: 80px 20px;
+    color: #666;
+}
+
+.no-content .icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.no-content h3 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.no-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Info Section */
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.info-card {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    border-left: 4px solid #667eea;
+}
+
+.info-card h3 {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-item label {
+    font-weight: 600;
+    color: #555;
+}
+
+.info-item span {
+    color: #333;
+    text-align: right;
+}
+
+.social-links-detailed {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-link-detailed {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.social-link-detailed:hover {
+    border-color: #667eea;
+    transform: translateX(5px);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+/* Modal Enhancements */
+.artwork-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.btn-back-grid {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-back-grid:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Artist Link in Modal */
+.artist-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    padding-bottom: 2px;
+}
+
+.artist-link:hover {
+    border-bottom-color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.artwork-description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    font-style: italic;
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 15px;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Header link style for Cadavrix title */
+header h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header h1 a:hover {
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-main {
+        padding: 20px 10px;
+    }
+    
+    .artist-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .artist-name {
+        font-size: 2em;
+    }
+    
+    .artist-stats {
+        justify-content: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .gallery-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .artworks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .artist-header {
+        padding: 20px 15px;
+    }
+    
+    .avatar-placeholder {
+        width: 80px;
+        height: 80px;
+        font-size: 2em;
+    }
+    
+    .artist-name {
+        font-size: 1.8em;
+    }
+    
+    .artworks-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-tabs {
+        flex-direction: column;
+    }
+    
+    .social-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .social-link {
+        justify-content: center;
+    }
+}

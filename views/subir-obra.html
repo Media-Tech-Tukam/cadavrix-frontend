@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Obra - Cadavrix</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/subir-obra.css">
+</head>
+<body>
+    <!--<header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1><a href="../views/index.html">CADAVRIX</a></h1>
+                    <p>Cadáver Exquisito Digital</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../views/index.html">Grid</a></li>
+                    <li><a href="../views/participar.html">Participar</a></li>
+                    <li><a href="#" class="active">Subir Obra</a></li>
+                    <li><a href="#" id="userMenuToggle">Mi Cuenta</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>-->
+    <header>
+        <h1>Cadavrix</h1>
+        <a href="#" class="btnParticipar">Participar</a>
+        <nav>
+            <ul>
+                <li><a href="../views/index.html">Inicio</a></li>
+                <li><a href="../views/participar.html">Participar</a></li>
+                <li><a href="#" class="active">Subir Obra</a></li>
+                <li><a href="#" id="userMenuToggle">Mi Cuenta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="upload-main">
+        <div class="upload-container">
+            
+            <!-- Estado: No autenticado -->
+            <div id="notAuthenticated" class="step-container hidden">
+               <!-- <div class="icon-large">🔒</div>-->
+                <h2>Acceso Requerido</h2>
+                <p>Necesitas iniciar sesión para subir tu obra.</p>
+                <div class="cta-buttons">
+                    <a href="../views/auth.html" class="btn-primary">Iniciar Sesión</a>
+                </div>
+            </div>
+
+            <!-- Estado: Sin celda asignada -->
+            <div id="noCellAssigned" class="step-container hidden">
+                <!--<div class="icon-large">❌</div>-->
+                <h2>¡Primero Necesitas una Celda!</h2>
+                <p>Para subir una obra, primero debes tener una celda asignada en el grid.</p>
+                <div class="cta-buttons">
+                    <a href="../views/participar.html" class="btn-primary">Obtener Mi Celda</a>
+                </div>
+            </div>
+
+            <!-- Estado: Ya subió obra -->
+            <div id="artworkExists" class="step-container hidden">
+                <!--<div class="icon-large">✅</div>-->
+                <h2>Ya Subiste tu Obra</h2>
+                <p>Tu contribución al cadáver exquisito ya está en el grid.</p>
+                
+                <div class="current-artwork">
+                    <h3>Tu Obra Actual:</h3>
+                    <div class="artwork-preview">
+                        <img id="currentArtworkImage" src="" alt="Tu obra actual">
+                        <div class="artwork-details">
+                            <h4 id="currentArtworkTitle"></h4>
+                            <p id="currentArtworkDescription"></p>
+                            <p><strong>Posición:</strong> (<span id="currentArtworkX"></span>, <span id="currentArtworkY"></span>)</p>
+                            <p><strong>Subida:</strong> <span id="currentArtworkDate"></span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="replace-option">
+                    <h3>¿Quieres reemplazarla?</h3>
+                    <p>Puedes actualizar tu obra, pero la anterior se eliminará permanentemente.</p>
+                    <button id="enableReplaceBtn" class="btn-secondary">Reemplazar Obra</button>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="../views/index.html" class="btn-primary">Ver en Grid</a>
+                    <a href="../views/profile.html?artist=current" class="btn-secondary">Mi Perfil</a>
+                </div>
+            </div>
+
+            <!-- Formulario de Upload -->
+            <div id="uploadForm" class="step-container hidden">
+               <!-- <div class="icon-large">🎨</div>-->
+                <h2>Sube tu Obra al Cadáver Exquisito</h2>
+                
+                <div class="cell-reminder">
+                    <p><strong>Tu celda asignada:</strong> (<span id="assignedCellX">0</span>, <span id="assignedCellY">0</span>)</p>
+                </div>
+
+                <form id="artworkForm" enctype="multipart/form-data">
+                    <!-- Upload de Imagen -->
+                    <div class="form-section">
+                        <h3>📁 Selecciona tu Imagen</h3>
+                        
+                        <div class="upload-area" id="uploadArea">
+                            <div class="upload-icon">📷</div>
+                            <p class="upload-text">Arrastra tu imagen aquí o haz clic para seleccionar</p>
+                            <p class="upload-specs">PNG o JPG • 2200×2200px • Máximo 10MB</p>
+                            <input type="file" id="imageFile" name="image" accept="image/png,image/jpeg" required>
+                        </div>
+
+                        <div id="imagePreview" class="image-preview hidden">
+                            <img id="previewImage" src="" alt="Vista previa">
+                            <div class="image-info">
+                                <p id="imageSpecs"></p>
+                                <button type="button" id="changeImageBtn" class="btn-link">Cambiar imagen</button>
+                            </div>
+                        </div>
+
+                        <div id="imageValidation" class="validation-messages"></div>
+                    </div>
+
+                    <!-- Información de la Obra -->
+                    <div class="form-section">
+                        <h3>📝 Información de tu Obra</h3>
+                        
+                        <div class="form-group">
+                            <label for="artworkTitle">Título *</label>
+                            <input type="text" id="artworkTitle" name="title" required 
+                                   placeholder="¿Cómo se llama tu creación?"
+                                   minlength="3" maxlength="200">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="artworkDescription">Descripción *</label>
+                            <textarea id="artworkDescription" name="description" required 
+                                      placeholder="Describe tu obra, inspiración, técnica utilizada..."
+                                      minlength="10" maxlength="1000"></textarea>
+                            <small id="descriptionCount">0/1000 caracteres</small>
+                        </div>
+                    </div>
+
+                    <!-- Template Usado (opcional) -->
+                    <div class="form-section">
+                        <h3>🎨 Template</h3>
+                        <div class="form-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="usedTemplate">
+                                <span class="checkmark"></span>
+                                Usé el template personalizado descargado desde Cadavrix
+                            </label>
+                            <p class="help-text">Si marcas esta opción, nos ayudas a entender mejor el proceso creativo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Revisión Final -->
+                    <div class="form-section">
+                        <h3>✅ Revisión Final</h3>
+                        <div class="checklist">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="correctSize" required>
+                                <span class="checkmark"></span>
+                                Mi imagen es exactamente 2200×2200 píxeles
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="originalWork" required>
+                                <span class="checkmark"></span>
+                                Esta es mi obra original y acepto que forme parte del proyecto colaborativo
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="finalVersion" required>
+                                <span class="checkmark"></span>
+                                Esta es la versión final de mi contribución al cadáver exquisito
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submitBtn" class="btn-primary btn-large" disabled>
+                            Subir mi Obra
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Procesando Upload -->
+            <div id="uploading" class="step-container hidden">
+             <!--   <div class="icon-large">⏳</div>-->
+                <h2>Procesando tu Obra...</h2>
+                
+                <div class="upload-progress">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <p id="uploadStatus">Subiendo imagen...</p>
+                </div>
+
+                <div class="processing-steps">
+                    <div class="step" id="step1">📤 Subiendo imagen...</div>
+                    <div class="step" id="step2">🔍 Validando dimensiones...</div>
+                    <div class="step" id="step3">✂️ Procesando imagen...</div>
+                    <div class="step" id="step4">💾 Guardando en el grid...</div>
+                    <div class="step" id="step5">✨ ¡Completado!</div>
+                </div>
+            </div>
+
+            <!-- Success -->
+            <div id="uploadSuccess" class="step-container hidden">
+              <!--  <div class="icon-large">🎉</div>-->
+                <h2>¡Tu Obra fue Subida Exitosamente!</h2>
+                
+                <div class="success-artwork">
+                    <div class="artwork-final-preview">
+                        <img id="finalArtworkImage" src="" alt="Tu obra final">
+                        <div class="artwork-final-details">
+                            <h3 id="finalArtworkTitle"></h3>
+                            <p id="finalArtworkDescription"></p>
+                            <p><strong>Posición en el grid:</strong> (<span id="finalArtworkX"></span>, <span id="finalArtworkY"></span>)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="next-steps-success">
+                    <h3>¿Qué sigue?</h3>
+                    <ul>
+                        <li>Tu obra ahora es parte del cadáver exquisito digital</li>
+                        <li>Otros artistas verán fragmentos de tu trabajo en sus templates</li>
+                        <li>Puedes explorar el grid completo y ver otras contribuciones</li>
+                        <li>¡Comparte tu participación en redes sociales!</li>
+                    </ul>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="../views/index.html" class="btn-primary">Explorar el Grid</a>
+                    <a href="../views/profile.html?artist=current" class="btn-secondary">Ver mi Perfil</a>
+                </div>
+            </div>
+
+            <!-- Error Messages -->
+            <div id="errorMessage" class="message error hidden"></div>
+            <div id="successMessage" class="message success hidden"></div>
+        </div>
+    </main>
+
+
+
+    <script src="../public/js/subir-obra.js"></script>
+</body>
+</html>

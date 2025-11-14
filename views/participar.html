@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participar - Cadavrix</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/participar.css">
+</head>
+<body>
+    <!--<header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1><a href="../views/index.html">CADAVRIX</a></h1>
+                    <p>Cadáver Exquisito Digital</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../views/index.html">Grid</a></li>
+                    <li><a href="#" class="active">Participar</a></li>
+                    <li><a href="../views/subir-obra.html">Subir Obra</a></li>
+                    <li><a href="#" id="userMenuToggle">Mi Cuenta</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>-->
+    <header>
+        <h1>Cadavrix</h1>
+        <a href="#" class="btnParticipar">Participar</a>
+        <nav>
+            <ul>
+                <li><a href="../views/index.html">Inicio</a></li>
+                    <li><a href="#" class="active">Participar</a></li>
+                    <li><a href="../views/subir-obra.html">Subir Obra</a></li>
+                    <li><a href="#" id="userMenuToggle">Mi Cuenta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="participar-main">
+        <div class="participar-container">
+            
+            <!-- Estado: No autenticado -->
+            <div id="notAuthenticated" class="step-container hidden">
+                <!--<div class="icon-large">🎨</div>-->
+                <h2>¡Únete al Cadáver Exquisito!</h2>
+                <p>Para participar necesitas crear una cuenta de artista.</p>
+                <div class="cta-buttons">
+                    <a href="../views/auth.html" class="btn-primary">Registrarse</a>
+                    <a href="../views/auth.html" class="btn-secondary">Iniciar Sesión</a>
+                </div>
+            </div>
+
+            <!-- Estado: Sin celda asignada -->
+            <div id="noCellAssigned" class="step-container hidden">
+               <!--<div class="icon-large">🎲</div>-->
+                <h2>¡Hora de la Sorpresa!</h2>
+                <p class="welcome-text">Hola <span id="artistName"></span>, ¿listo para participar en el cadáver exquisito digital?</p>
+                
+                <div class="explanation-box">
+                    <h3>¿Cómo funciona?</h3>
+                    <ol>
+                        <li><strong>Asignación Aleatoria:</strong> El sistema te asignará una celda al azar</li>
+                        <li><strong>Template Personalizado:</strong> Recibirás un template con fragmentos de tus vecinos</li>
+                        <li><strong>Crear Offline:</strong> Usa tu software favorito para crear tu arte</li>
+                        <li><strong>Subir Resultado:</strong> Regresa para compartir tu obra</li>
+                    </ol>
+                </div>
+
+                <div class="grid-status">
+                    <h3>Estado del Grid</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number" id="totalCells">100</span>
+                            <span class="stat-label">Total Celdas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="occupiedCells">0</span>
+                            <span class="stat-label">Ocupadas</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="availableCells">100</span>
+                            <span class="stat-label">Disponibles</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="progressPercent">0%</span>
+                            <span class="stat-label">Completado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="assignCellBtn" class="btn-primary btn-large">
+                    ¡Asignar Mi Celda!
+                </button>
+            </div>
+
+            <!-- Estado: Celda asignada -->
+            <div id="cellAssigned" class="step-container hidden">
+                <!--<div class="icon-large">✅</div>-->
+                <h2>¡Tu Celda Ha Sido Asignada!</h2>
+                
+                <div class="cell-info">
+                    <div class="cell-position">
+                        <h3>Tu Posición</h3>
+                        <div class="position-display">
+                            <span class="coords">(<span id="cellX">0</span>, <span id="cellY">0</span>)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-preview">
+                        <h3>Vista del Grid</h3>
+                        <div id="miniGrid" class="mini-grid"></div>
+                        <p class="mini-grid-legend">
+                            <span class="legend-item"><span class="color-box your-cell"></span>Tu celda</span>
+                            <span class="legend-item"><span class="color-box occupied-cell"></span>Ocupadas</span>
+                            <span class="legend-item"><span class="color-box empty-cell"></span>Vacías</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="neighbors-info">
+                    <h3>Tus Vecinos</h3>
+                    <p>Tu template incluirá fragmentos (100px) de estas celdas vecinas:</p>
+                    <div id="neighborsList" class="neighbors-grid"></div>
+                </div>
+
+                <div class="template-section">
+                    <h3>Template Personalizado</h3>
+                    <div class="template-info">
+                        <div class="template-specs">
+                            <h4>Especificaciones:</h4>
+                            <ul>
+                                <li>Tamaño: <strong>2200×2200px</strong></li>
+                                <li>Área de trabajo: <strong>2000×2000px</strong> (centro)</li>
+                                <li>Bordes: <strong>100px</strong> con fragmentos de vecinos</li>
+                                <li>Formato: <strong>PNG</strong> de alta calidad</li>
+                            </ul>
+                        </div>
+                        <div class="template-preview">
+                            <div class="template-diagram">
+                                <div class="template-border">100px</div>
+                                <div class="template-center">
+                                    <span>Tu área de trabajo</span>
+                                    <span>2000×2000px</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button id="generateTemplateBtn" class="btn-primary btn-large">
+                        Generar y Descargar Template
+                    </button>
+                </div>
+
+                <div class="next-steps">
+                    <h3>Próximos Pasos</h3>
+                    <ol>
+                        <li>Descarga tu template personalizado</li>
+                        <li>Ábrelo en tu software de arte favorito (Photoshop, Procreate, etc.)</li>
+                        <li>Crea tu arte en el área central, inspirándote en los fragmentos vecinos</li>
+                        <li>Guarda tu obra como PNG de 2200×2200px</li>
+                        <li>Regresa para <a href="../views/subir-obra.html">subir tu creación</a></li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Estado: Ya tiene obra subida -->
+            <div id="artworkSubmitted" class="step-container hidden">
+                <!--<div class="icon-large">🎉</div>-->
+                <h2>¡Ya Participaste!</h2>
+                <p>Tu obra ya forma parte del cadáver exquisito digital.</p>
+                
+                <div class="artwork-info">
+                    <h3>Tu Contribución:</h3>
+                    <div class="submitted-artwork">
+                        <img id="submittedImage" src="" alt="Tu obra">
+                        <div class="artwork-details">
+                            <h4 id="artworkTitle"></h4>
+                            <p id="artworkDescription"></p>
+                            <p><strong>Posición:</strong> (<span id="artworkX"></span>, <span id="artworkY"></span>)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="../views/index.html" class="btn-primary">Ver en el Grid</a>
+                    <a href="../views/profile.html?artist=current" class="btn-secondary">Mi Perfil</a>
+                </div>
+            </div>
+
+            <!-- Loading y mensajes -->
+            <div id="loadingSection" class="loading hidden">
+                <div class="spinner"></div>
+                <p id="loadingText">Cargando...</p>
+            </div>
+
+            <div id="errorMessage" class="message error hidden"></div>
+            <div id="successMessage" class="message success hidden"></div>
+        </div>
+    </main>
+
+    
+
+    <script src="../public/js/participar.js"></script>
+</body>
+</html>

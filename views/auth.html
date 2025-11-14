@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Cadavrix</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/auth.css">
+</head>
+<body>
+    <!--<header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">
+                    <h1><a href="../views/index.html">CADAVRIX</a></h1>
+                    <p>Cadáver Exquisito Digital</p>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../views/index.html">Grid</a></li>
+                    <li><a href="#" class="active">Acceso</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>-->
+    <header>
+        <h1>Cadavrix</h1>
+        <a href="#" class="btnParticipar">Participar</a>
+        <nav>
+            <ul>
+                <li><a href="../views/index.html">Inicio</a></li>
+                <li><a href="#" class="active">Acceso</a></li>
+                <li><a href="#">¿Qué es Cadavrix?</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="auth-main">
+        <div class="auth-container">
+            <!-- Tabs para alternar entre Login y Registro -->
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+                <button class="tab-btn" data-tab="register">Registrarse</button>
+            </div>
+
+            <!-- Formulario de Login -->
+            <div id="login-form" class="auth-form active">
+                <h2>Iniciar Sesión</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Contraseña</label>
+                        <input type="password" id="loginPassword" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Entrar</button>
+                    
+                    <div class="form-footer">
+                        <p>¿No tienes cuenta? <a href="#" onclick="switchTab('register')">Regístrate aquí</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Formulario de Registro -->
+            <div id="register-form" class="auth-form">
+                <h2>Únete a Cadavrix</h2>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">Nombre de Artista</label>
+                        <input type="text" id="registerName" name="name" required 
+                               placeholder="Como quieres que aparezca en tus obras">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">Contraseña</label>
+                        <input type="password" id="registerPassword" name="password" required minlength="6">
+                        <small>Mínimo 6 caracteres</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerBio">Biografía Artística</label>
+                        <textarea id="registerBio" name="bio" required 
+                                  placeholder="Cuéntanos sobre tu arte, técnicas o inspiración..."
+                                  minlength="20" maxlength="500"></textarea>
+                        <small id="bioCount">0/500 caracteres (mínimo 20)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h4>Redes Sociales (Opcionales)</h4>
+                        
+                        <label for="facebook">Facebook</label>
+                        <input type="url" id="facebook" name="facebook" 
+                               placeholder="https://facebook.com/tu-perfil">
+                        
+                        <label for="instagram">Instagram</label>
+                        <input type="url" id="instagram" name="instagram" 
+                               placeholder="https://instagram.com/tu-perfil">
+                        
+                        <label for="website">Sitio Web</label>
+                        <input type="url" id="website" name="website" 
+                               placeholder="https://tu-portafolio.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terms" required>
+                            <span class="checkmark"></span>
+                            Acepto participar en esta obra colectiva y que mi arte forme parte del cadáver exquisito digital
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Crear Cuenta</button>
+                    
+                    <div class="form-footer">
+                        <p>¿Ya tienes cuenta? <a href="#" onclick="switchTab('login')">Inicia sesión</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Mensajes de estado -->
+            <div id="authMessage" class="message hidden"></div>
+            
+            <!-- Loading spinner -->
+            <div id="authLoading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Procesando...</p>
+            </div>
+        </div>
+    </main>
+
+   
+
+    <script src="../public/js/auth.js"></script>
+    <script src="../public/js/navigation.js"></script>
+</body>
+</html>
