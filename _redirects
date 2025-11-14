@@ -1,0 +1,2 @@
+/  /views/index.html  200
+/views/*  /views/:splat  200
