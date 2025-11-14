@@ -319,7 +319,8 @@ class CadavrixGrid {
         const artworkDescription = artworkElement.dataset.artworkDescription;
         
         // Actualizar contenido de la modal - RUTA PARA BACKEND
-        modalImg.src = `http://localhost:5000/${imgSrc}`;
+        const baseUrl = window.CadavrixConfig.API_BASE_URL.replace('/api', '');
+        modalImg.src = `${baseUrl}/${imgSrc}`;
         modalImg.alt = `Obra: ${artworkTitle} por ${artistName}`;
         modalTitle.textContent = artworkTitle;
         

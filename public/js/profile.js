@@ -409,7 +409,8 @@ class ArtistProfile {
         const modal = document.getElementById('artworkModal');
         
         // RUTA PARA BACKEND API
-        const imgSrc = `http://localhost:5000/${artwork.image}`;
+        const baseUrl = window.CadavrixConfig.API_BASE_URL.replace('/api', '');
+        const imgSrc = `${baseUrl}/${artwork.image}`;
         
         // Actualizar contenido
         document.getElementById('modalArtworkImg').src = imgSrc;
