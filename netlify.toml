@@ -1,9 +1,39 @@
+# ======================================
+# NETLIFY.TOML CORREGIDO
+# ======================================
+
 [build]
   publish = "."
   
+# Redirects para manejar rutas correctamente
 [[redirects]]
   from = "/"
   to = "/views/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/index.html"
+  to = "/views/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/profile.html"
+  to = "/views/profile.html"
+  status = 200
+
+[[redirects]]
+  from = "/auth.html"
+  to = "/views/auth.html"
+  status = 200
+
+[[redirects]]
+  from = "/participar.html"
+  to = "/views/participar.html"
+  status = 200
+
+[[redirects]]
+  from = "/subir-obra.html"
+  to = "/views/subir-obra.html"
   status = 200
 
 [[redirects]]
@@ -11,6 +41,13 @@
   to = "/views/:splat"
   status = 200
 
+# Catch-all para SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/views/index.html"
+  status = 200
+
+# Headers de seguridad
 [[headers]]
   for = "/*"
   [headers.values]
