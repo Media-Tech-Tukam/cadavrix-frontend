@@ -133,7 +133,6 @@ nav ul li a:hover {
 
 .artwork-container {
     flex: 2;
-    background-color: #f8f8f8;
     display: flex;
     align-items: center;
     justify-content: center;
